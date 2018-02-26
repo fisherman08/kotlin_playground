@@ -11,10 +11,10 @@ fun main(args :Array<String>){
 
         workbook = WorkbookFactory.create(FileInputStream(Paths.get(String.javaClass.getResource("/poi/test.xlsx").toURI()).toFile()))
 
-        val sheet :Sheet? = workbook.getSheet("新シート")
+        val sheet :Sheet? = workbook["新シート"]
 
         if(sheet != null){
-            val cell :Cell? = sheet.getRow(2)?.getCell(2)
+            val cell :Cell? = sheet[2, 2]
             println(cell?.numericCellValue?.toInt())
         }
 
@@ -26,4 +26,12 @@ fun main(args :Array<String>){
     }
 
 
+}
+
+operator fun Workbook.get(sheetName :String) :Sheet? {
+    return this.getSheet(sheetName)
+}
+
+operator fun Sheet.get(row :Int, column :Int) :Cell? {
+    return this.getRow(row)?.getCell(column)
 }
