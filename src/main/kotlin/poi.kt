@@ -15,7 +15,7 @@ fun main(args: Array<String>) {
         val sheet: Sheet = workbook["結合テスト"] ?: workbook.createSheet()
 
         for (i in sheet.firstRowNum..sheet.lastRowNum) {
-            println("${sheet[i, 3]?.rowIndex}: ${sheet[i, 2] ?: ""}")
+            println("${sheet[i, 3]?.rowIndex}: ${sheet[i, 1] ?: ""}")
         }
 
     } catch (e: Exception) {
@@ -45,12 +45,12 @@ operator fun Sheet.get(row :Int, column :Int) :Cell? {
     val cell = this.getRow(row)?.getCell(column) ?: return null
 
     for(mergedRegion in this.mergedRegions) {
-        if(mergedRegion.isInRange(cell) && !mergedRegion.isFirstCell(cell)) {
-            // 結合されたセルだったら本来のセルは無視して結合された中の一番左上のセルの値で上書きする
-            val cellToDisplay = this[mergedRegion.firstRow, mergedRegion.firstColumn] ?: cell
-            cell.copyValues(cellToDisplay)
-            break
-        } else if(mergedRegion.isInRange(cell)){
+        if(mergedRegion.isInRange(cell)) {
+            if(!mergedRegion.isFirstCell(cell)) {
+                // 結合されたセルだったら本来のセルは無視して結合された中の一番左上のセルの値で上書きする
+                val cellToDisplay = this[mergedRegion.firstRow, mergedRegion.firstColumn] ?: cell
+                cell.copyValues(cellToDisplay)
+            }
             break
         }
     }
