@@ -5,10 +5,11 @@
         <Property name="loglayout">[%d{yyyy-MM-dd HH:mm:ss.SSS}][%-5p](%c) %m%n</Property>
         <Property name="logDir">${sys:logDir}</Property>
         <Property name="logFile">${sys:logFile}</Property>
+        <Property name="logFileExtension">${sys:logFileExtension}</Property>
     </Properties>
 
     <Appenders>
-        <RollingFile name="rolling" fileName="${logDir}/${logFile}.log" filePattern="${logDir}/${logFile}-%d{yyyy-MM-dd}-%i.log">
+        <RollingFile name="rolling" fileName="${logDir}/${logFile}.${logFileExtension}" filePattern="${logDir}/${logFile}-%d{yyyy-MM-dd}-%i.${logFileExtension}">
             <PatternLayout pattern="${loglayout}"/>
             <Policies>
                 <!--<OnStartupTriggeringPolicy />-->
@@ -23,7 +24,7 @@
         <Logger name="kotlin_playground"  additivity="false">
             <AppenderRef ref="rolling"/>
         </Logger>
-        <Logger name="kotlin_playground2"  additivity="false">
+        <Logger name="LoggingKt"  additivity="false">
             <AppenderRef ref="rolling"/>
         </Logger>
     </Loggers>

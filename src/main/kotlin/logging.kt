@@ -1,29 +1,43 @@
 import org.apache.logging.log4j.Level
 import org.apache.logging.log4j.LogManager
+import org.apache.logging.log4j.Logger
 import org.apache.logging.log4j.core.LoggerContext
 
 
 fun main(args :Array<String>){
-    System.setProperty("logDir", "log3")
-    System.setProperty("logFile", "hogege")
+
+    val props :HashMap<String, String> = hashMapOf(
+            "logLevel" to "debug",
+            "logDir" to "log",
+            "logFile" to "lololo"
+    )
+
+
+    System.setProperty("logDir", props["logDir"] ?: "log")
+    System.setProperty("logFile", props["logFile"] ?: "logging")
+    System.setProperty("logFileExtension", props["logFileExtension"] ?: "log")
 
     val loggerContext = LogManager.getContext(false) as LoggerContext
     val configuration = loggerContext.getConfiguration()
     val loggerConfig = configuration.getLoggerConfig(LogManager.ROOT_LOGGER_NAME)
 
-    if(args.contains("-level=info")) {
-        loggerConfig.level = Level.INFO
-    } else {
-        loggerConfig.level = Level.ERROR
+    when(props["logLevel"]) {
+        "debug" -> loggerConfig.level = Level.DEBUG
+        "info"  -> loggerConfig.level = Level.INFO
+        "warn"  -> loggerConfig.level = Level.WARN
+        else    -> loggerConfig.level = Level.ERROR
     }
-
 
     loggerContext.updateLoggers()
 
-    val logger = LogManager.getLogger("kotlin_playground")
+    //val logger :Logger = LogManager.getLogger("kotlin_playground")
+    val logger :Logger = LogManager.getLogger(Throwable().getStackTrace()[0].getClassName())
+
 
     try {
 
+        doNothing()
+        logger.debug("debug")
         logger.info("info")
         logger.error("エラーが発生しました！")
 
@@ -38,5 +52,9 @@ fun main(args :Array<String>){
     }
 
 
+
+}
+
+fun doNothing() {
 
 }
