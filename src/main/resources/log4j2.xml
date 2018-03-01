@@ -3,14 +3,17 @@
 
     <Properties>
         <Property name="loglayout">[%d{yyyy-MM-dd HH:mm:ss.SSS}][%-5p](%c) %m%n</Property>
+        <Property name="logDir">${sys:logDir}</Property>
+        <Property name="logFile">${sys:logFile}</Property>
     </Properties>
 
     <Appenders>
-        <RollingFile name="rolling" fileName="log/kotlin_playground.log" filePattern="log/kotlin_playground-%d{yyyy-MM-dd}-%i.zip">
+        <RollingFile name="rolling" fileName="${logDir}/${logFile}.log" filePattern="${logDir}/${logFile}-%d{yyyy-MM-dd}-%i.log">
             <PatternLayout pattern="${loglayout}"/>
             <Policies>
-
-                <TimeBasedTriggeringPolicy />
+                <!--<OnStartupTriggeringPolicy />-->
+                <!--<TimeBasedTriggeringPolicy />-->
+                <SizeBasedTriggeringPolicy size="10 MB" />
             </Policies>
             <DefaultRolloverStrategy max="10"/>
         </RollingFile>

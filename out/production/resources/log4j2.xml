@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="off">
 
-    <!-- AppenterやLoggerで使用するプロパティを定義する -->
     <Properties>
         <Property name="loglayout">[%d{yyyy-MM-dd HH:mm:ss.SSS}][%-5p](%c) %m%n</Property>
+        <Property name="logDir">${sys:logDir}</Property>
+        <Property name="logFile">${sys:logFile}</Property>
     </Properties>
 
-    <!-- ログの出力先と出力フォーマットを設定する -->
     <Appenders>
-        <RollingFile name="rolling" fileName="log/kotlin_playground.log" filePattern="log/kotlin_playground-%d{yyyy-MM-dd}-%i.zip">
+        <RollingFile name="rolling" fileName="${logDir}/${logFile}.log" filePattern="${logDir}/${logFile}-%d{yyyy-MM-dd}-%i.log">
             <PatternLayout pattern="${loglayout}"/>
             <Policies>
                 <!--<OnStartupTriggeringPolicy />-->
-                <!--<SizeBasedTriggeringPolicy size="20 MB" />-->
-                <TimeBasedTriggeringPolicy />
+                <!--<TimeBasedTriggeringPolicy />-->
+                <SizeBasedTriggeringPolicy size="10 MB" />
             </Policies>
             <DefaultRolloverStrategy max="10"/>
         </RollingFile>
     </Appenders>
 
-    <!-- パッケージごとにAppenderとログレベルを組み合わせる -->
     <Loggers>
         <Logger name="kotlin_playground"  additivity="false">
             <AppenderRef ref="rolling"/>
