@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="off">
+
+    <Properties>
+        <Property name="loglayout">[%d{yyyy-MM-dd HH:mm:ss.SSS}][%-5p](%c) %m%n</Property>
+    </Properties>
+
+    <Appenders>
+        <RollingFile name="rolling" fileName="log/kotlin_playground.log" filePattern="log/kotlin_playground-%d{yyyy-MM-dd}-%i.zip">
+            <PatternLayout pattern="${loglayout}"/>
+            <Policies>
+
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="kotlin_playground"  additivity="false">
+            <AppenderRef ref="rolling"/>
+        </Logger>
+        <Logger name="kotlin_playground2"  additivity="false">
+            <AppenderRef ref="rolling"/>
+        </Logger>
+    </Loggers>
+</Configuration>
