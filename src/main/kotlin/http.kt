@@ -8,6 +8,7 @@ fun main(args: Array<String>){
     try {
 
         FuelManager.instance.basePath = "https://www.google.co.jp"
+        FuelManager.instance.baseHeaders = mapOf("goe" to "rr")
 
         // Stringで撮ってくるバージョン
         val (request, response, result) = "/".httpGet().responseString(charset = Charsets.UTF_8)
