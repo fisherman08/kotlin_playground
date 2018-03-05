@@ -41,7 +41,7 @@ fun main(args :Array<String>){
         logger.info("info")
         logger.error("エラーが発生しました！")
 
-        throw Exception("だめだkりゃ")
+        throw Exception("だめだこりゃ")
 
     } catch (e: Exception){
         var message = e.toString()
