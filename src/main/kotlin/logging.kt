@@ -22,6 +22,7 @@ fun main(args :Array<String>){
     val loggerConfig = configuration.getLoggerConfig(LogManager.ROOT_LOGGER_NAME)
 
     when(props["logLevel"]) {
+        "trace" -> loggerConfig.level = Level.TRACE
         "debug" -> loggerConfig.level = Level.DEBUG
         "info"  -> loggerConfig.level = Level.INFO
         "warn"  -> loggerConfig.level = Level.WARN
