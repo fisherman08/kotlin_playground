@@ -15,7 +15,7 @@ fun main(args: Array<String>) {
         val sheet: Sheet = workbook["新シート"] ?: workbook.createSheet()
 
         for (i in sheet.firstRowNum..sheet.lastRowNum) {
-            println("${sheet[i, 3]?.rowIndex}: ${sheet[i, 0] ?: ""}")
+            println("${sheet[i, 3]?.rowIndex}: ${sheet[i, 1] ?: ""}")
         }
 
     } catch (e: Exception) {
