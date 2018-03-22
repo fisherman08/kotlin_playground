@@ -7,7 +7,7 @@ fun main(args :Array<String>){
         val メアド = "example@example.com"
         val mail = SimpleEmail()
 
-        mail.setHostName("localhost")
+        mail.hostName = "localhost"
         //mail.setHostName("smtp.gmail.com")
         //mail.setSmtpPort(25)
 
