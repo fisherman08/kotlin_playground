@@ -26,6 +26,7 @@ fun main(args :Array<String>){
         "debug" -> loggerConfig.level = Level.DEBUG
         "info"  -> loggerConfig.level = Level.INFO
         "warn"  -> loggerConfig.level = Level.WARN
+        "error" -> loggerConfig.level = Level.ERROR
         else    -> loggerConfig.level = Level.ERROR
     }
 
