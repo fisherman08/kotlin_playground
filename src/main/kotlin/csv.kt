@@ -17,6 +17,10 @@ fun main(args: Array<String>){
     printer.print("1")
     printer.print("2")
     printer.print("3")
+    printer.print("1")
+    printer.print("2")
+    printer.print("3\ntt")
+
 
     printer.flush()
     println(os.toString())
