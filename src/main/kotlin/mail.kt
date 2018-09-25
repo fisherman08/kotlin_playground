@@ -22,7 +22,7 @@ fun main(args :Array<String>){
         mail.subject = "タイトルd"
         mail.setMsg("ほげげのげ")
 
-        mail.send()
+        val result = mail.send()
 
     } catch (e: Exception){
         e.printStackTrace()
