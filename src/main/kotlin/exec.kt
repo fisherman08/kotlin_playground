@@ -1,32 +1,32 @@
-import kotlinx.coroutines.experimental.*
 
+
+import jdk.nashorn.internal.objects.Global
+import kotlinx.coroutines.*
 import java.lang.Thread.sleep
 
 fun main(args: Array<String>){
 
-    val result = mutableListOf<Int>()
+    try {
+        runBlocking {
+            launch {
+                delay(500)
+                println(1)
+            }
 
-    println("start")
+            launch {
+                delay(500)
 
-    runBlocking {
-        val jobs = List(1000) { i ->
-            async() {
-                result.add(hoge(i))
+                println(2)
             }
         }
 
-        jobs.forEach { it.join() }
-
+        println("finish")
+    } catch (e: Exception){
+        e.printStackTrace()
     }
 
-    //result.sortBy { i -> i }
-    result.sort()
-    println("finish")
 
 }
 
-suspend fun hoge(i :Int) :Int{
-    println(i)
-    delay(500)
-    return i
-}
+
+
